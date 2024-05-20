@@ -1,0 +1,1 @@
+CREATE ALIAS IF NOT EXISTS FIELD FOR "com.example.demo.h2.Functions.field";

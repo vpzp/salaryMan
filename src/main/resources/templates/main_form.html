@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+</head>
+    <body>
+    <div layout:fragment="content">
+        <div class="mx-auto" style="width: 900px;">
+            <div class="container-md bg-warning bg-opacity-25">
+                <div class="p-2 text-dark">
+                    <div class="position-relative">
+                        <div class="row p-3">
+                            <div class="col gx-5">
+                                <div class="text-center">
+                                    <h2 class="border border-primary">시스템 공지사항</h2>
+                                </div>
+                                <hr>
+                                <div th:each="announce : ${announcePost}">
+                                    <a th:href="@{|/post/detail/${announce.id}|}" th:text="${announce.subject}">
+                                        제목
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col gx-5">
+                                <div class="text-center">
+                                    <h2 class="border border-primary">자주 묻는 질문</h2>
+                                </div>
+                                <hr>
+                                <div th:each="question : ${questionPost}">
+                                    <a th:href="@{|/post/detail/${question.id}|}" th:text="${question.subject}">
+                                        제목
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <p>고객센터</p>
+                            <p>000-0000-0000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

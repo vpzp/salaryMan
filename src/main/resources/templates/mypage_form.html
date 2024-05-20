@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="mx-auto" style="width: 400px;">
+        <div class="container-md">
+            <div class="p-2 text-dark">
+                <div class="position-relative">
+                    <div class="text-center">
+                        <h2 class="border border-dark">내 프로필</h2>
+                    </div>
+                    <p>
+                        <span th:text = "${siteUser.name}">이름</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">실명 수정</button>
+                    </p>
+                    <p>
+                        <span th:text = "${siteUser.phoneNumber}">전화번호</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">수정</button>
+                    </p>
+                    <p>
+                        <span th:text = "${siteUser.email}">이메일</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">수정</button>
+                    </p>
+                    <p>
+                        <span th:text = "${company.name}">직장</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">직장 수정</button>
+                    </p>
+                    <p>
+                        <span th:text = "${siteUser.rank}">직책</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">직책 수정</button>
+                    </p>
+                    <p>
+                        <span th:text = "${siteUser.bank}">은행</span>
+                        <span th:text = "${siteUser.accountNumber}">계좌 번호</span>
+                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">계좌 수정</button>
+                    </p>
+                    <br>
+                    <div class="position-relative">
+                        <div class="text-center">
+                            <h2 class="border border-dark">보안 설정</h2>
+                        </div>
+                        <p>
+                            <span>비밀 번호</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0">수정</button>
+                        </p>
+                        <p>
+                            <span>타 지역 로그인 차단</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0">켜기</button>
+                        </p>
+                        <p>
+                            <span>해외 로그인 차단</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0">끄기</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>

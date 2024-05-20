@@ -1,0 +1,22 @@
+<nav th:fragment="navbarFragment" class="navbar bg-body-tertiary" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <div class="container-fluid" style="width: 900px;">
+    <a class="navbar-brand" th:href="@{/main}">
+      <img th:src="@{/images/salaryMan.png}" alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+      SALARY MAN
+    </a>
+    <div class="nav-item">
+      <a class="nav-link active" th:href="@{/salary/management}">급여 관리</a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link active" th:href="@{/salary/specification}">급여 명세서</a>
+    </div>
+    <div sec:authorize="isAnonymous()">
+      <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/login}'|">로그인</button>
+      <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/signup}'|">회원가입</button>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+      <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/mypage}'|">마이페이지</button>
+      <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/logout}'|">로그아웃</button>
+    </div>
+  </div>
+</nav>

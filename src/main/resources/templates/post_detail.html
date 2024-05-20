@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="mx-auto" style="width: 900px;">
+        <h2 class="border-bottom py-2" th:text="${post.subject}"></h2>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;" th:text="${post.content}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
