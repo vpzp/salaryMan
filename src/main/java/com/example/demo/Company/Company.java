@@ -18,10 +18,10 @@ public class Company {
 
     private String name;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany()
     private List<SiteUser> siteUser;
 
-    @OneToMany(mappedBy = "name")
+    @OneToMany()
     private List<Staff> staff;
 
 }

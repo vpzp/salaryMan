@@ -1,46 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
-<head>
-</head>
-    <body>
-    <div layout:fragment="content">
-        <div class="mx-auto" style="width: 900px;">
-            <div class="container-md bg-warning bg-opacity-25">
-                <div class="p-2 text-dark">
-                    <div class="position-relative">
-                        <div class="row p-3">
-                            <div class="col gx-5">
-                                <div class="text-center">
-                                    <h2 class="border border-primary">시스템 공지사항</h2>
-                                </div>
-                                <hr>
-                                <div th:each="announce : ${announcePost}">
-                                    <a th:href="@{|/post/detail/${announce.id}|}" th:text="${announce.subject}">
-                                        제목
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col gx-5">
-                                <div class="text-center">
-                                    <h2 class="border border-primary">자주 묻는 질문</h2>
-                                </div>
-                                <hr>
-                                <div th:each="question : ${questionPost}">
-                                    <a th:href="@{|/post/detail/${question.id}|}" th:text="${question.subject}">
-                                        제목
-                                    </a>
-                                </div>
-                            </div>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid" style="width: 900px;">
+        <a class="navbar-brand" th:href="@{/main}">
+            <img th:src="@{/images/salaryMan.png}" alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+            SALARY MAN
+        </a>
+        <div sec:authorize="isAnonymous()">
+            <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/login}'|">로그인</button>
+            <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/signup}'|">회원가입</button>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/user/logout}'|">로그아웃</button>
+        </div>
+    </div>
+</nav>
+<div class="mx-auto" style="width: 700px;">
+    <div class="row">
+        <div class="col-4 border border-dark p-2" >
+            <a class="navbar-brand" th:href="@{/salary/management}">
+                <img th:src="@{/images/management.png}" alt="Logo" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+        </div>
+        <div class="col-4 border border-dark p-2">
+            <a class="navbar-brand" th:href="@{/salary/specification}">
+                <img th:src="@{/images/specification.png}" alt="Logo" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+        </div>
+        <div class="col-4 border border-dark p-2">
+            <a class="navbar-brand" th:href="@{/user/mypage}">
+                <img th:src="@{/images/mypage.png}" alt="Logo"width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<div class="mx-auto" style="width: 900px;">
+    <div class="container-md bg-warning bg-opacity-25">
+        <div class="p-2 text-dark">
+            <div class="position-relative">
+                <div class="row p-3">
+                    <div class="col gx-5">
+                        <div class="text-center">
+                            <h2 class="border border-primary">시스템 공지사항</h2>
                         </div>
                         <hr>
-                        <div class="text-center">
-                            <p>고객센터</p>
-                            <p>000-0000-0000</p>
+                        <div th:each="announce : ${announcePost}">
+                            <a th:href="@{|/post/detail/${announce.id}|}" th:text="${announce.subject}">
+                                제목
+                            </a>
                         </div>
                     </div>
+                    <div class="col gx-5">
+                        <div class="text-center">
+                            <h2 class="border border-primary">자주 묻는 질문</h2>
+                        </div>
+                        <hr>
+                        <div th:each="question : ${questionPost}">
+                            <a th:href="@{|/post/detail/${question.id}|}" th:text="${question.subject}">
+                                제목
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p>고객센터</p>
+                    <p>000-0000-0000</p>
                 </div>
             </div>
         </div>
     </div>
-    </body>
+</div>
 </html>

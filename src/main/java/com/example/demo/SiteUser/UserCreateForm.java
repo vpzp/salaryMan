@@ -28,6 +28,12 @@ public class UserCreateForm {
 
     private String phoneNumber;
 
+    private String authority;
+
+    private boolean spouse;
+
+    private int children;
+
     private String rank;
 
     private String department;

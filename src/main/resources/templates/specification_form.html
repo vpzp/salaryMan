@@ -4,6 +4,193 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <div class="mx-auto" style="width: 1000px;">
+        <div class="container-md">
+            <div class="p-2 text-dark">
+                <div class="position-relative">
+                    <div class="text-center">
+                        <br>
+                        <!--                        명세서 시작-->
+                        <div class="row">
+                            <div class="col-2 border border-dark bg-secondary bg-opacity-25">
+                                성명
+                            </div>
+                            <div class="col border border-dark" th:text = "${user.name}">
+                                성명
+                            </div>
+                            <div class="col-2 border border-dark bg-secondary bg-opacity-25">
+                                사번
+                            </div>
+                            <div class="col border border-dark" th:text = "${user.id}">
+                                id
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 border border-dark bg-secondary bg-opacity-25">
+                                부서
+                            </div>
+                            <div class="col border border-dark" th:text = "${user.department}">
+                                부서명
+                            </div>
+                            <div class="col-2 border border-dark bg-secondary bg-opacity-25">
+                                직급
+                            </div>
+                            <div class="col border border-dark" th:text = "${user.rank}">
+                                직급
+                            </div>
+                        </div>
+                        <div class="row bg-secondary bg-opacity-25">
+                            <div class="col border border-dark">
+                                세부내역
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                지급
+                            </div>
+                            <div class="col border-end border-dark bg-secondary bg-opacity-25">
+                                공제
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                임금 항목
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                지급 금액(원)
+                            </div>
+                            <div class="col-6 border-end border-bottom border-dark bg-secondary bg-opacity-25">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border-start border-dark bg-secondary bg-opacity-25">
+                            </div>
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                기본급
+                            </div>
+                            <div class="col border border-dark" th:text = "${user.price}">
+                                기본급(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                소득세
+                            </div>
+                            <div class="col-3 border border-dark" th:text ="${salaryService.getIncomeTex(salaryService.getPayment(user))}">
+                                소득세(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border-start border-dark bg-secondary bg-opacity-25">
+                            </div>
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                연장근로수당
+                            </div>
+                            <div class="col border border-dark" th:text ="${salaryService.getOverTimePrice(user.price, user.overTime)}">
+                                연장근로수당(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                국민연금
+                            </div>
+                            <div class="col-3 border border-dark" th:text="${salaryService.getNationalPension(salaryService.getPayment(user))}">
+                                국민연금(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border-start border-dark bg-secondary bg-opacity-25">
+                                매월 지급
+                            </div>
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                야간근로수당
+                            </div>
+                            <div class="col border border-dark" th:text ="${salaryService.getNightTimePrice(user.price, user.nightTime)}">
+                                야간근로수당(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                고용 보험
+                            </div>
+                            <div class="col-3 border border-dark" th:text ="${salaryService.getEmploymentInsurance(salaryService.getPayment(user))}">
+                                고용 보험(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border-start border-dark bg-secondary bg-opacity-25">
+                            </div>
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                휴일근로수당
+                            </div>
+                            <div class="col border border-dark" th:text ="${salaryService.getHolidayTimePrice(user.price, user.holidayTime)}">
+                                휴일근로수당(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                건강 보험
+                            </div>
+                            <div class="col-3 border border-dark" th:text ="${salaryService.getHealthInsurance(salaryService.getPayment(user))}">
+                                건강 보험(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border-start border-dark bg-secondary bg-opacity-25">
+                            </div>
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                가족수당
+                            </div>
+                            <div class="col border border-dark" th:text = "${salaryService.getFamilyPrice(user.price, user.isSpouse, user.children)}">
+                                가족수당(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                노동조합비
+                            </div>
+                            <div class="col-3 border border-dark" th:text ="${salaryService.getTradeUnion(salaryService.getPayment(user))}">
+                                노동조합비(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                지급액 계
+                            </div>
+                            <div class="col border border-dark" th:text ="${salaryService.getPayment(user)}">
+                                지급액(금액)
+                            </div>
+                            <div class="col-3 border border-dark bg-secondary bg-opacity-25">
+                                공제액
+                            </div>
+                            <div class="col-3 border border-dark" th:text ="${salaryService.getTex(user)}">
+                                공제액(금액)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col border border-dark bg-secondary bg-opacity-25">
+                                실 수령액(원)
+                            </div>
+                            <div class="col border border-dark" th:text ="${salaryService.getPay(user)}">
+                                실 수령액(금액)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="d-grid justify-content-md-center">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#print" >인쇄하기</button>
+                </div>
+                <div class="modal fade" id = "print" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5">인쇄하기</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span>인쇄하시겠습니까 ?</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </body>

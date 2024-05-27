@@ -12,36 +12,67 @@
                         <br>
                         <div class="border border-dark">
                             <div class="row justify-content-end align-items-center">
-                                <div class="col-4">
+                                <div class="col">
                                     <h2>직원 목록</h2>
-                                </div>
-                                <div class="col-4">
-                                    <div class="d-grid justify-content-md-end">
-                                        <button type="button" class="btn btn-outline-dark" >추가</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <br>
 <!--                        직원 목록 시작-->
-                        <div class="row d-flex justify-content-around" th:each="staff, loop : ${paging}">
-                            <div class="col" th:text ="${staff.name}">
-                                <p>이름</p>
+                        <div th:each="user, loop : ${paging}">
+                            <div class="row d-flex justify-content-around">
+                                <div class="col" th:text ="${user.name}">
+                                    <p>이름</p>
+                                </div>
+                                <div class="col-6">
+                                    <span th:text ="${user.company.name}">회사</span>
+                                    <span th:text ="${user.department}">부서</span>
+                                    <span th:text ="${user.rank}">직급</span>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" th:attr ="data-bs-target=${'#price' + user.id}">금액</button>
+                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" th:attr ="data-bs-target=${'#transfer' + user.id}">이체</button>
+                                    <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/salary/option/}'+${user.longId}|">설정</button>
+                                </div>
+                                <br>
+                                <br>
                             </div>
-                            <div class="col-6">
-                                <span th:text ="${staff.company.name}">회사</span>
-                                <span th:text ="${staff.department}">부서</span>
-                                <span th:text ="${staff.rank}">직급</span>
+<!--                            직원 목록 끝-->
+                            <!--                        모달 내용 시작-->
+                            <div class="modal fade" th:id = "${'price' + user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">금액</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" th:text ="${'이번달 월급은 '+salaryService.getPay(user) +' 입니다.'}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <button type="button" class="btn btn-outline-dark" >계산</button>
-                                <button type="button" class="btn btn-outline-dark" >이체</button>
-                                <button type="button" class="btn btn-outline-dark" >설정</button>
+                            <div class="modal fade" th:id = "${'transfer' + user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5">이체</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" th:text ="${user.bank+' '+user.accountNumber+' 계좌로 '+salaryService.getPay(user)+'을 이체하시겠습니까 ?'}">
+                                            '은행' '계좌번호'로 '금액'을 이체하시겠습니까 ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <br>
-                            <br>
+                            <!--                        모달 내용 끝-->
                         </div>
-<!--                        직원 목록 끝-->
                     </div>
                 </div>
             </div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="mx-auto" style="width: 900px;">
+        <div class="container-md" style="height:600px">
+            <div class="p-2 text-dark">
+                <div class="position-relative">
+                    <div class="text-center">
+                        <br>
+                        <div class="border border-dark">
+                            <div class="row justify-content-end align-items-center">
+                                <div class="col">
+                                    <h2>직원 목록</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--                        직원 목록 시작-->
+                        <div th:each="user, loop : ${paging}">
+                            <div class="row d-flex justify-content-around">
+                                <div class="col" th:text ="${user.name}">
+                                    <p>이름</p>
+                                </div>
+                                <div class="col-6">
+                                    <span th:text ="${user.company.name}">회사</span>
+                                    <span th:text ="${user.department}">부서</span>
+                                    <span th:text ="${user.rank}">직급</span>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/salary/specification/list/}'+${user.longId}|">조회</button>
+                                </div>
+                                <br>
+                                <br>
+                            </div>
+                            <!--                            직원 목록 끝-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--            페이징 처리 시작-->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center align-items-end">
+                <br>
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--            페이징 처리 끝-->
+    </div>
+
+</div>
+</body>
+</html>

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/post")
 public class PostController {
     private final PostService postService;
+
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id){
         Post post = this.postService.getPost(id);
         model.addAttribute("post", post);
+
         return "post_detail";
     }
 }

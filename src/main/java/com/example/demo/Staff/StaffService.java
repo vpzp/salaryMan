@@ -35,12 +35,12 @@ public class StaffService {
         this.staffRepository.save(staff);
     }
 
-    public Page<Staff> getList(Company company, int page) {
-        Pageable pageable = PageRequest.of(page, 10);
-        return staffRepository.findByCompanyOrderByRank(company, pageable);
-    }
-
-    public List<Staff> getStaffFindById(Company company){
-        return this.staffRepository.findByCompany(company);
-    }
+//    public Page<Staff> getList(Company company, int page) {
+//        Pageable pageable = PageRequest.of(page, 10);
+//        return staffRepository.findByCompanyOrderByRank(company, pageable);
+//    }
+//
+//    public List<Staff> getStaffFindById(Company company){
+//        return this.staffRepository.findByCompany(company);
+//    }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -47,7 +48,8 @@ public class SiteUserController {
         try{
             siteUserService.create(userCreateForm.getId(), userCreateForm.getPassword1(), userCreateForm.getCompany(),
                     userCreateForm.getName(), userCreateForm.getPhoneNumber(), userCreateForm.getRank(), userCreateForm.getDepartment(),
-                    userCreateForm.getEmail(),userCreateForm.getBank(), userCreateForm.getAccountNumber());
+                    userCreateForm.getEmail(),userCreateForm.getBank(), userCreateForm.getAccountNumber(), userCreateForm.getAuthority(),
+                    userCreateForm.isSpouse(), userCreateForm.getChildren());
         }catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -67,5 +69,32 @@ public class SiteUserController {
         model.addAttribute("company", company);
         model.addAttribute("siteUser", siteUserService.getUserByName(principal.getName()));
         return "mypage_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String modify(@PathVariable("id") long longId , UserModifyForm userModifyForm, Model model){
+        SiteUser user = siteUserService.getUserById(longId);
+        model.addAttribute("user", user);
+        return "modify_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String createModify(@PathVariable("id") long longId, @Valid UserModifyForm userModifyForm, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "modify_form";
+        }
+        try {
+            SiteUser user = siteUserService.getUserById(longId);
+            model.addAttribute("user", user);
+            siteUserService.modify(longId, userModifyForm.getPhoneNumber(), userModifyForm.getEmail(), userModifyForm.getCompany(),
+                    userModifyForm.getBank(), userModifyForm.getAccountNumber());
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "modify_form";
+        }
+        return "redirect:/main";
     }
 }

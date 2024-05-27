@@ -28,4 +28,9 @@ public class MainController {
         return "main_form";
     }
 
+    @GetMapping("/denied")
+    public String accessDenied() {
+        return "denied_form";
+    }
+
 }

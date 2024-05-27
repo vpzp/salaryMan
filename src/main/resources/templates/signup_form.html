@@ -54,6 +54,14 @@
                         <option th:value="이디소프트">이디소프트</option>
                     </select>
 
+                    <p style="text-align: left; font-size:12px; color:#666">권한</p>
+                    <div style="text-align:left;">
+                        <label for="authorityAdmin">관리자</label>
+                        <input type="radio" th:field = "*{authority}" value="관리자" id="authorityAdmin">
+                        <label for="authorityUser">사용자</label>
+                        <input type="radio" th:field = "*{authority}" value="사용자" id="authorityUser">
+                    </div>
+
                     <p style="text-align: left; font-size:12px; color:#666">직급</p>
                     <select class="size num1" th:field="*{rank}">
                         <option th:value="사장">사장</option>
@@ -65,6 +73,26 @@
                         <option th:value="인턴" selected>인턴</option>
                     </select>
                     <input th:field="*{department}" placeholder="부서"  class="size num2">
+
+                    <p style="text-align: left; font-size:12px; color:#666">배우자 유무</p>
+                    <div style="text-align:left;">
+                        <label for="spouseTrue">있음</label>
+                        <input type="radio" th:field = "*{spouse}" value="true" id="spouseTrue">
+                        <label for="spouseFalse">없음</label>
+                        <input type="radio" th:field = "*{spouse}" value="false" id="spouseFalse">
+                    </div>
+
+                    <p style="text-align: left; font-size:12px; color:#666">자녀의 수</p>
+                    <div style="text-align:left;">
+                        <label for="children0">0</label>
+                        <input type="radio" th:field = "*{children}" value=0 id="children0">
+                        <label for="children1">1</label>
+                        <input type="radio" th:field = "*{children}" value=1 id="children1">
+                        <label for="children2">2</label>
+                        <input type="radio" th:field = "*{children}" value=2 id="children2">
+                        <label for="children3">3</label>
+                        <input type="radio" th:field = "*{children}" value=3 id="children3">
+                    </div>
 
                     <p style="text-align: left; font-size:12px; color:#666">계좌</p>
                     <select class="size num1" th:field="*{bank}">
@@ -79,6 +107,7 @@
 
                     <p style="text-align: left; font-size:12px; color:#666">이메일</p>
                     <input type="text" th:field="*{email}" placeholder="이메일" class="size">
+                    <p></p>
 
                     <br>
                     <p></p>
@@ -107,7 +136,7 @@
     }
     #con{
         width:100%;
-        height: 100vh;
+        height: 100%;
         background-color:#f5f1ee;
         background-image:url("img/bg.jpg");
         background-position: center center;
@@ -117,7 +146,7 @@
     }
     #login{
         width:600px;
-        height: 600px;
+        height: 1100px;
         margin:0 auto;
     }
     #login_form{

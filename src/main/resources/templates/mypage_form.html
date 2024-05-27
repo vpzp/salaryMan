@@ -11,31 +11,28 @@
                     <div class="text-center">
                         <h2 class="border border-dark">내 프로필</h2>
                     </div>
-                    <p>
-                        <span th:text = "${siteUser.name}">이름</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">실명 수정</button>
-                    </p>
-                    <p>
-                        <span th:text = "${siteUser.phoneNumber}">전화번호</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">수정</button>
-                    </p>
-                    <p>
-                        <span th:text = "${siteUser.email}">이메일</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">수정</button>
-                    </p>
-                    <p>
-                        <span th:text = "${company.name}">직장</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">직장 수정</button>
-                    </p>
-                    <p>
-                        <span th:text = "${siteUser.rank}">직책</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">직책 수정</button>
-                    </p>
-                    <p>
-                        <span th:text = "${siteUser.bank}">은행</span>
-                        <span th:text = "${siteUser.accountNumber}">계좌 번호</span>
-                        <button type="button" class="btn btn-outline-secondary position-absolute end-0">계좌 수정</button>
-                    </p>
+                    <form th:action ="@{user/modify}" method="get">
+                        <p>
+                            <span th:text = "${siteUser.name}">이름</span>
+                        </p>
+                        <p>
+                            <span th:text = "${siteUser.phoneNumber}">전화번호</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0" th:onclick="|location.href='@{/user/modify/}'+${siteUser.longId}|">수정</button>
+                        </p>
+                        <p>
+                            <span th:text = "${siteUser.email}">이메일</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0" th:onclick="|location.href='@{/user/modify/}'+${siteUser.longId}|">수정</button>
+                        </p>
+                        <p>
+                            <span th:text = "${company.name}">직장</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0" th:onclick="|location.href='@{/user/modify/}'+${siteUser.longId}|">직장 수정</button>
+                        </p>
+                        <p>
+                            <span th:text = "${siteUser.bank}">은행</span>
+                            <span th:text = "${siteUser.accountNumber}">계좌 번호</span>
+                            <button type="button" class="btn btn-outline-secondary position-absolute end-0" th:onclick="|location.href='@{/user/modify/}'+${siteUser.longId}|">계좌 수정</button>
+                        </p>
+                    </form>
                     <br>
                     <div class="position-relative">
                         <div class="text-center">
@@ -57,6 +54,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
 </body>
 </html>
